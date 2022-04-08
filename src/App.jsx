@@ -9,39 +9,18 @@ const App = () => {
 
   return (
     <div className="container">
-      <CardInput>
-        <h4> Red: {red} </h4>
-        <input
-          type="range"
-          min="0"
-          max="255"
-          value={red}
-          onChange={({ target }) => setRed(parseInt(target.value))}
-        />
-      </CardInput>
+      <div className="card-container">
+        <CardInput color="Red" colorState={red} setState={setRed} />
+        <CardInput color="Green" colorState={green} setState={setGreen} />
+        <CardInput color="Blue" colorState={blue} setState={setBlue} />
+      </div>
 
-      <h4> Green: {green} </h4>
-      <input
-        type="range"
-        min="0"
-        max="255"
-        value={green}
-        onChange={({ target }) => setGreen(parseInt(target.value))}
+      <ColorBox
+        bgColor={`rgb(${red},${green},${blue})`}
+        redColor={red}
+        blueColor={blue}
+        greenColor={green}
       />
-
-      <h4> Blue: {blue} </h4>
-      <input
-        type="range"
-        min="0"
-        max="255"
-        value={blue}
-        onChange={({ target }) => setBlue(parseInt(target.value))}
-      />
-
-      <ColorBox bgColor={`rgb(${red},${green},${blue})`} />
-      <p>
-        {red},{blue},{green}
-      </p>
     </div>
   );
 };
