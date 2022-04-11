@@ -2,21 +2,25 @@ import "./styles.css";
 
 const History = ({ data, backgroundColor }) => {
   return (
-    <section>
-      <h4>Cores Geradas</h4>
+    <>
+      {!!data.length && (
+        <section>
+          <h4>Cores Geradas</h4>
 
-      <ul>
-        {data.map((rgb) => (
-          <li key={rgb.join()}>
-            <div
-              className="small-preview"
-              style={{ backgroundColor: backgroundColor(...rgb) }}
-            ></div>
-            {rgb.join(". ")}
-          </li>
-        ))}
-      </ul>
-    </section>
+          <ul>
+            {data.map((rgb) => (
+              <li key={rgb.join()}>
+                <div
+                  className="small-preview"
+                  style={{ backgroundColor: backgroundColor(...rgb) }}
+                ></div>
+                {rgb.join(". ")}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </>
   );
 };
 

@@ -15,34 +15,58 @@ const App = () => {
   const isColorInHistory = history.some(
     (rgb) => JSON.stringify(rgb) === JSON.stringify([red, green, blue])
   );
+  const generateRandomColor = () => {
+    setRed(Math.floor(Math.random() * 256));
+    setGreen(Math.floor(Math.random() * 256));
+    setBlue(Math.floor(Math.random() * 256));
+  };
+
+  const generateRandomColorConfirm = () => {
+    generateRandomColor();
+    setHistory((h) => [[red, green, blue], ...h]);
+  };
 
   return (
-    <div className="container">
-      <div className="card-container">
-        <CardInput color="Red" colorState={red} setState={setRed} />
-        <CardInput color="Green" colorState={green} setState={setGreen} />
-        <CardInput color="Blue" colorState={blue} setState={setBlue} />
-      </div>
-      <ColorBox
-        bgColor={handlebackgroundColor(red, green, blue)}
-        redColor={red}
-        blueColor={blue}
-        greenColor={green}
-      />
-      <button
-        onClick={() => setHistory((h) => [...h, [red, green, blue]])}
-        disabled={isColorInHistory}
-        // disabled={}
-      >
-        Guardar cor{" "}
-      </button>
-      <br />
-      <br />
-      <hr />
-      <br />
+    <>
+      <div className="container">
+        <h1> Gerador de Cores RGB</h1>
+        <div className="card-container">
+          <CardInput color="Red" colorState={red} setState={setRed} />
+          <CardInput color="Green" colorState={green} setState={setGreen} />
+          <CardInput color="Blue" colorState={blue} setState={setBlue} />
+        </div>
+        <ColorBox
+          bgColor={handlebackgroundColor(red, green, blue)}
+          redColor={red}
+          blueColor={blue}
+          greenColor={green}
+        />
 
-      <History data={history} backgroundColor={handlebackgroundColor} />
-    </div>
+        <div className="button-organize">
+          <button
+            onClick={() => setHistory((h) => [...h, [red, green, blue]])}
+            disabled={isColorInHistory}
+          >
+            Guardar cor{" "}
+          </button>
+          <button
+            onClick={generateRandomColorConfirm}
+            disabled={isColorInHistory}
+          >
+            Gerar cor aleatória e Guardar{" "}
+          </button>
+          <button onClick={generateRandomColor}>
+            Gerar cor aleatória sem guardar
+          </button>
+        </div>
+        <br />
+        <br />
+        <hr />
+        <br />
+
+        <History data={history} backgroundColor={handlebackgroundColor} />
+      </div>
+    </>
   );
 };
 
